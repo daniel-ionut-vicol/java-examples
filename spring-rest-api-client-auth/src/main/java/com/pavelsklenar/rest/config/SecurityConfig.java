@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.header.HeaderWriterFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -18,11 +19,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+    	
+    	http.authorizeRequests()
                 .anyRequest().authenticated().and()
                 .x509()
                     .subjectPrincipalRegex("CN=(.*?)(?:,|$)")
-                    .userDetailsService(userDetailsService());
+                    .userDetailsService(userDetailsService())
+                    .and().addFilterAfter(new CustomAuthenticationFilter(), HeaderWriterFilter.class);
         http.csrf().disable();
     }
 

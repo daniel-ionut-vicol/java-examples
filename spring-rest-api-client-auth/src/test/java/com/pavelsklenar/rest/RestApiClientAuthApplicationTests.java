@@ -77,8 +77,8 @@ public class RestApiClientAuthApplicationTests {
 		urlConn.setRequestProperty("Accept", "application/json");
 		urlConn.setRequestProperty("Content-Type", "application/json");
 		
-//		urlConn.setRequestProperty("Accept", "application/json");
-//		urlConn.setRequestProperty("Content-Type", "application/json");
+		urlConn.setRequestProperty("businessCode", "GCB");
+		urlConn.setRequestProperty("countryCode", "TW");
 		
 		String requestBody = "{\"requestBody\":{\"imageRequest\":{\"country_Code\":\"TW\",\"image_ID\":\"09021b6680079d1a9\"}}}";
 		urlConn.connect();
