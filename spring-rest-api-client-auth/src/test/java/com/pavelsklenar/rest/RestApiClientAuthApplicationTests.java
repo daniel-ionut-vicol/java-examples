@@ -59,7 +59,7 @@ public class RestApiClientAuthApplicationTests {
 	@Test
 	public void contextLoads() throws IOException, UnrecoverableKeyException, KeyManagementException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
 		HttpsURLConnection.setDefaultHostnameVerifier ((hostname, session) -> true);
-		URL url = new URL("https://localhost:"+randomPort+"/customer/1");
+		URL url = new URL("https://localhost:"+randomPort+"/attachment");
 		HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
 		if (urlConn instanceof HttpsURLConnection) {
 			SSLSocketFactory sslContextFactory = getSSLSocketFactory();
@@ -80,7 +80,7 @@ public class RestApiClientAuthApplicationTests {
 //		urlConn.setRequestProperty("Accept", "application/json");
 //		urlConn.setRequestProperty("Content-Type", "application/json");
 		
-		String requestBody = null;
+		String requestBody = "{\"requestBody\":{\"imageRequest\":{\"country_Code\":\"TW\",\"image_ID\":\"09021b6680079d1a9\"}}}";
 		urlConn.connect();
         if (requestBody != null)
         {
