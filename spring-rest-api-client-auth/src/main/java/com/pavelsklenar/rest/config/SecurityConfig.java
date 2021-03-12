@@ -24,15 +24,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .x509()
                     .subjectPrincipalRegex("CN=(.*?)(?:,|$)")
                     .userDetailsService(userDetailsService());
+        http.csrf().disable();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
         return (UserDetailsService) username -> {
-            if (username.equals("pavel")) {
-                return new User(username, "",
+            if (username.equals("daniel")) {
+                return new User(username, username,
                         AuthorityUtils
-                                .commaSeparatedStringToAuthorityList("ROLE_USER"));
+                                .commaSeparatedStringToAuthorityList(""));
             } else {
                 throw new UsernameNotFoundException(String.format("User %s not found", username));
             }
